@@ -1,0 +1,4 @@
+pip install requests
+
+from huggingface_hub import login
+login(token="*************************")  # Replace with your actual token if needed

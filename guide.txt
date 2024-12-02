@@ -1,0 +1,93 @@
+Guide to Using Hugging Face API for Text Generation
+1. Introduction
+This document provides a step-by-step guide on how to create a Hugging Face account, generate an API token, set up a Python environment, and interact with Hugging Face models for text generation. This guide is designed for beginners who want to use Hugging Face models to process text input and store the results.
+
+2. Creating a Hugging Face Account
+Step 1: Visit Hugging Face Website
+1.Open your web browser and go to Hugging Face's website.
+2.Click on the Sign Up button located in the top-right corner of the page.
+Step 2: Register for an Account
+1.Fill in the required fields:
+oEmail Address
+oUsername
+oPassword
+2.Click on the Sign Up button.
+3.Verify your email by clicking the confirmation link sent to your inbox.
+
+3. Generate API Token
+Step 1: Log in to Your Account
+1.After confirming your email, return to Hugging Face and log in using your credentials.
+Step 2: Access Account Settings
+1.Once logged in, click on your profile icon at the top-right corner.
+2.From the dropdown menu, select Settings.
+Step 3: Generate a New Token
+1.Scroll down to the Access Tokens section.
+2.Click on the New Token button.
+3.Enter a token name (e.g., my_model_token).
+4.Choose access permissions (read or read/write).
+5.Click Generate Token.
+Step 4: Copy Your Token
+1.After the token is generated, copy the token as you'll need it to authenticate API requests.
+4. Install Python and Required Libraries
+Step 1: Install Python
+1.If you don't have Python installed, download and install it from python.org.
+Step 2: Install the Requests Library
+1.Open the terminal or command prompt.
+2.Run the following command to install the requests library:
+          pip install requests
+5. Create Python Script for Model Interaction
+Step 1: Create the Python Script
+1.Create a new file (e.g., huggingface_inference.py).
+2.Copy and paste the following Python code into the file:
+import requests
+import json
+# Replace with your token from Hugging Face
+headers = {
+    "Authorization": "Bearer YOUR_TOKEN"  # Use your token here
+}
+# API endpoint for a model (you can change this to any model you like)
+API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
+# Function to send requests to the Hugging Face API
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+# Ask for user input
+input_query = input("Enter your query: ")
+# Send the input to the model and get the output
+output = query({"inputs": input_query})
+# Save the input and output to a file
+result = {
+    "input": input_query,
+    "output": output
+}
+# Save the result to a JSON file
+with open("input_output.json", "w") as f:
+    json.dump(result, f, indent=4)
+print("Input and output saved to input_output.json")
+Step 2: Replace Token
+1.Replace YOUR_TOKEN with the token you generated earlier in the Authorization header.
+6. Run the Script
+Step 1: Execute the Python Script
+1.Open a terminal or command prompt.
+2.Navigate to the folder where you saved the Python script.
+Provide Input
+1.The script will prompt you to enter a query:
+Enter your query: What is Artificial Intelligence?
+Step 3: View the Output
+1.After submitting the query, the script will send it to the Hugging Face model, receive the response, and display it.
+2.The input and output will be saved in a file named input_output.json.
+7. Output Format
+The output file input_output.json will have the following structure:
+{
+    "input": "What is Artificial Intelligence?",
+    "output": "Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think and act like humans."
+}
+8. Conclusion
+You have successfully:
+1.Created a Hugging Face account and generated an API token.
+2.Installed Python and the requests library.
+3.Interacted with Hugging Face models through the API for text generation.
+4.Saved both input and output to a structured JSON file.
+Additional Notes:
+You can modify the script to work with different models by changing the API_URL to point to another model endpoint.
+If you need to handle multiple queries or save results in another format (e.g., CSV), you can modify the script accordingly.

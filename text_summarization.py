@@ -3,7 +3,7 @@ import json
 
 # Hugging Face API details
 API_URL = "https://api-inference.huggingface.co/models/meta-llama/Llama-3.2-1B"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer **************************"}
 
 # Function to send a query to the Hugging Face model
 def query(payload):
